@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Darysa - Next.js Project
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-13.5.0-black?style=for-the-badge&logo=next.js)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0.0-blue?style=for-the-badge&logo=tailwind-css)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
+![Prettier](https://img.shields.io/badge/Prettier-3.6.2-fuchsia?style=for-the-badge&logo=prettier)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-First, run the development server:
+---
+
+## 📖 Descripción
+
+Darysa es un proyecto web moderno construido con **Next.js**, **TailwindCSS** y **TypeScript**, utilizando herramientas como **Prettier**, **ESLint** y **shadcn/ui** para mantener un código limpio y consistente.
+
+El proyecto está pensado para entornos de desarrollo colaborativos y multiplataforma (Windows/Linux/macOS).
+
+---
+
+## 🛠 Tecnologías
+
+- [Next.js 13](https://nextjs.org/)
+- [TailwindCSS 4](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Prettier](https://prettier.io/)
+- [ESLint](https://eslint.org/)
+- [Husky](https://typicode.github.io/husky/#/) (opcional, para hooks pre-commit)
+- [shadcn/ui](https://ui.shadcn.com/)
+- Gestores de paquetes: **pnpm** (recomendado), npm o yarn
+
+---
+
+## ⚡ Scripts
+
+> Se recomienda usar `pnpm`, pero si prefieres `npm` o `yarn`, los comandos equivalentes funcionan igual (`npm run <script>` o `yarn <script>`).
+
+| Comando        | Descripción                                      |
+| -------------- | ------------------------------------------------ |
+| `pnpm install` | Instala todas las dependencias                   |
+| `pnpm dev`     | Levanta el servidor de desarrollo                |
+| `pnpm build`   | Genera el build de producción                    |
+| `pnpm start`   | Inicia la app en modo producción                 |
+| `pnpm lint`    | Ejecuta ESLint para revisar errores de código    |
+| `pnpm format`  | Formatea el proyecto usando Prettier (`--write`) |
+
+**Equivalentes en npm/yarn:**
+
+- `npm install` / `yarn install`
+- `npm run dev` / `yarn dev`
+- `npm run build` / `yarn build`
+- `npm run start` / `yarn start`
+- `npm run lint` / `yarn lint`
+- `npm run format` / `yarn format`
+
+> **Recomendación:** `pnpm` es más rápido y maneja dependencias de forma más eficiente, evitando duplicados en proyectos monorepo.
+
+---
+
+## 🚀 Levantar en Local
+
+1. **Clonar el repositorio:**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+git clone git@github.com:alexanderplaygroup/darysa.git
+cd darysa
+
+pnpm install
+# npm install
+# yarn install
+
+cp .env.example .env.local
+# Luego edita .env.local con tus valores
+
 pnpm dev
-# or
-bun dev
+# npm run dev
+# yarn dev
+
+http://localhost:3000
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
