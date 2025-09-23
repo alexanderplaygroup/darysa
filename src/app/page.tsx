@@ -1,8 +1,9 @@
+import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="min-h-screen  grid   gap-16 p-8 pb-20 font-sans sm:p-20 grid-rows-[20px_1fr_20px] items-center justify-items-center">
+    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20">
       <main className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">
         <Image
           className="dark:invert"
@@ -12,15 +13,16 @@ export default function Home() {
           height={38}
           priority
         />
-        <ol className="list-decimal text-center font-mono  list-inside  text-sm/6 sm:text-left p-4">
+        <ol className="list-inside list-decimal p-4 text-center font-mono text-sm/6 sm:text-left">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{' '}
             <code className="rounded bg-black/[.05] px-1 py-0.5 font-mono font-semibold dark:bg-white/[.06]">
               src/app/page.tsx
             </code>
-            .
+            <div className="mr-0.5 h-20 w-10 bg-black p-10 text-amber-50">asdasds</div>.
           </li>
           <li className="tracking-[-.01em]">prusad</li>
+          <Button className="flex w-full items-center p-2 py-20">asdasds</Button>
         </ol>
 
         <div className="flex flex-col items-center gap-4 sm:flex-row">
