@@ -20,7 +20,7 @@ export default function Home() {
             </code>
             .
           </li>
-          <li className="tracking-[-.01em]">chamo senior</li>
+          <li className="tracking-[-.01em]">prueba</li>
         </ol>
 
         <div className="flex flex-col items-center gap-4 sm:flex-row">
