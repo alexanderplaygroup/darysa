@@ -1,0 +1,9 @@
+services:
+  rubbermaid-prod:
+    build:
+      context: ../../
+      dockerfile: docker/production/prod.Dockerfile
+    image: rubbermaid-prod
+    container_name: rubbermaid-prod
+    ports:
+      - '3003:3000'

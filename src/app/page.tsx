@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
 export default function Home() {
@@ -22,7 +21,6 @@ export default function Home() {
             <div className="mr-0.5 h-20 w-10 bg-black p-10 text-amber-50">asdasds</div>.
           </li>
           <li className="tracking-[-.01em]">prusad</li>
-          <Button className="flex w-full items-center p-2 py-20">asdasds</Button>
         </ol>
 
         <div className="flex flex-col items-center gap-4 sm:flex-row">
