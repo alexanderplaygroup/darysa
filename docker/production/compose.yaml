@@ -1,9 +1,9 @@
 services:
-  rubbermaid-prod:
+  darysa-prod:
     build:
       context: ../../
       dockerfile: docker/production/prod.Dockerfile
-    image: rubbermaid-prod
-    container_name: rubbermaid-prod
+    image: darysa-prod
+    container_name: darysa-prod
     ports:
       - '3003:3000'
