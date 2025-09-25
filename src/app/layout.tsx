@@ -1,7 +1,9 @@
-import { boston, geistMono, geistSans } from '@/common/fonts';
 import type { Metadata } from 'next';
 
-import './globals.css';
+import { Footer } from '@/common/components/layout/Footer';
+import { Header } from '@/common/components/layout/header/Header';
+import { boston, geistMono, geistSans } from '@/common/styles/fonts/config';
+import '@common/styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${boston.className} ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${boston.className} ${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
       >
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
