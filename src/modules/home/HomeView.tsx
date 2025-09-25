@@ -1,11 +1,11 @@
 import { Container } from '@/common/components/custom-ui/Container';
+import { Banner } from './Banner';
 import { PromotionalModal } from './components/PromotionalModal';
-import HomeBanner from './HomeBanner';
 
 export const HomeView = () => {
   return (
     <Container>
-      <HomeBanner />
+      <Banner />
       <PromotionalModal modal="/logo-dark.svg" />
     </Container>
   );
