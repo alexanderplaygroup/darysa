@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export function CarouselBrand() {
   const autoplayRef = useRef(Autoplay({ delay: 4000, playOnInit: true }));
-  const [groupSize, setGroupSize] = useState(6); // default xl
+  const [groupSize, setGroupSize] = useState(6);
 
   const images = [
     '/home/brands/b1.png',
