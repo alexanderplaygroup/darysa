@@ -220,9 +220,148 @@ function CarouselNext({
   );
 }
 
+// function CarouselDots({
+//   className,
+//   renderDot,
+//   ...props
+// }: React.ComponentProps<'div'> & {
+//   renderDot?: (index: number, isActive: boolean, goTo: () => void) => React.ReactNode;
+// }) {
+//   const { api } = useCarousel();
+//   const [current, setCurrent] = React.useState(0);
+//   const [slideCount, setSlideCount] = React.useState(0);
+
+//   const recalc = React.useCallback(() => {
+//     if (!api) return;
+
+//     const totalSlides = api.scrollSnapList().length;
+//     setSlideCount(totalSlides);
+
+//     const selectedIndex = api.selectedScrollSnap();
+//     setCurrent(selectedIndex);
+//   }, [api]);
+
+//   React.useEffect(() => {
+//     if (!api) return;
+//     recalc();
+//     api.on('reInit', recalc);
+//     api.on('select', recalc);
+
+//     return () => {
+//       api.off('reInit', recalc);
+//       api.off('select', recalc);
+//     };
+//   }, [api, recalc]);
+
+//   if (slideCount === 0) return null;
+
+//   return (
+//     <div
+//       className={cn('mt-2 flex justify-center gap-2.5', className)}
+//       data-slot="carousel-dots"
+//       {...props}
+//     >
+//       {Array.from({ length: slideCount }).map((_, index) => {
+//         const isActive = current === index;
+//         const goTo = () => api?.scrollTo(index);
+
+//         return renderDot ? (
+//           renderDot(index, isActive, goTo)
+//         ) : (
+//           <button
+//             key={index}
+//             aria-label={`Ir al slide ${index + 1}`}
+//             aria-current={isActive}
+//             onClick={goTo}
+//             className={cn(
+//               'h-2.5 w-2.5 rounded-full transition-all duration-200',
+//               isActive
+//                 ? 'bg-darysa-verde-oscuro w-[34px]'
+//                 : 'bg-darysa-gris-claro-alt hover:bg-darysa-gris-claro cursor-pointer'
+//             )}
+//           />
+//         );
+//       })}
+//     </div>
+//   );
+// }
+
+function CarouselDots({
+  className,
+  renderDot,
+  groupSize = 6,
+  byGroup = false, // nuevo booleano
+  ...props
+}: React.ComponentProps<'div'> & {
+  renderDot?: (index: number, isActive: boolean, goTo: () => void) => React.ReactNode;
+  groupSize?: number;
+  byGroup?: boolean;
+}) {
+  const { api } = useCarousel();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
+
+  const recalc = React.useCallback(() => {
+    if (!api) return;
+
+    const totalSlides = api.scrollSnapList().length;
+
+    if (byGroup) {
+      const totalGroups = Math.ceil(totalSlides / groupSize);
+      setCount(totalGroups);
+      const selectedIndex = api.selectedScrollSnap();
+      setCurrent(Math.floor(selectedIndex / groupSize));
+    } else {
+      setCount(totalSlides);
+      setCurrent(api.selectedScrollSnap());
+    }
+  }, [api, groupSize, byGroup]);
+
+  React.useEffect(() => {
+    if (!api) return;
+    recalc();
+    api.on('reInit', recalc);
+    api.on('select', recalc);
+
+    return () => {
+      api.off('reInit', recalc);
+      api.off('select', recalc);
+    };
+  }, [api, recalc]);
+
+  if (count === 0) return null;
+
+  return (
+    <div className={cn('flex items-center justify-center gap-2.5', className)} {...props}>
+      {Array.from({ length: count }).map((_, index) => {
+        const isActive = current === index;
+        const goTo = () => (byGroup ? api?.scrollTo(index * groupSize) : api?.scrollTo(index));
+
+        return renderDot ? (
+          renderDot(index, isActive, goTo)
+        ) : (
+          <button
+            key={index}
+            aria-label={byGroup ? `Ir al grupo ${index + 1}` : `Ir al slide ${index + 1}`}
+            aria-current={isActive}
+            onClick={goTo}
+            className={cn(
+              'h-2.5 w-2.5 rounded-full transition-all duration-200',
+              isActive
+                ? 'bg-darysa-verde-oscuro w-[34px]'
+                : 'bg-darysa-gris-claro-alt hover:bg-darysa-gris-claro cursor-pointer'
+            )}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
 export {
   Carousel,
   CarouselContent,
+  CarouselDots,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,

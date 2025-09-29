@@ -6,7 +6,7 @@ import { Input } from '../../shadcn-ui/input';
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 w-full bg-white shadow-md">
+    <header className="sticky top-0 z-50 w-full bg-white shadow-md">
       <div className="mx-auto max-w-[1440px] space-y-6 py-4">
         <div className="w-full">
           <div className="container mx-auto flex items-center justify-between">

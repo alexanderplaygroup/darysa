@@ -1,46 +1,81 @@
 'use client';
-
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
+  CarouselDots,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from '@shadcnui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import * as React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import {
+  ClickableImageSlide,
+  ImageSlide,
+  VideoSlide,
+} from './components/carousel-banner/CarouselItemCustom';
 
 export function Banner() {
-  const plugin = React.useRef(
-    Autoplay({ delay: 1000, stopOnInteraction: false, playOnInit: true })
-  );
+  const autoplayRef = useRef(Autoplay({ delay: 4000, playOnInit: false }));
+  const [api, setApi] = useState<CarouselApi>();
+
+  const handleFullscreenChange = (isFullscreen: boolean) => {
+    if (!api) return;
+
+    // console.log('esta full:', isFullscreen);
+
+    if (isFullscreen) {
+      autoplayRef.current.stop();
+    } else {
+      autoplayRef.current.play();
+    }
+  };
+
+  useEffect(() => {
+    if (!api) return;
+    autoplayRef.current.play();
+  }, [api]);
+
+  //esta funcion sirve debuguear el carousel
+  // useEffect(() => {
+  //   if (!api) return;
+
+  //   const onStop = () => console.log('✅ Autoplay detenido');
+  //   const onPlay = () => console.log('▶️ Autoplay reanudado');
+
+  //   api.on('autoplay:stop', onStop);
+  //   api.on('autoplay:play', onPlay);
+
+  //   return () => {
+  //     api.off('autoplay:stop', onStop);
+  //     api.off('autoplay:play', onPlay);
+  //   };
+  // }, [api]);
 
   return (
     <Carousel
-      plugins={[plugin.current]}
+      plugins={[autoplayRef.current]}
       opts={{
         align: 'start',
         loop: true,
       }}
-      className="w-full max-w-xs"
-      onMouseEnter={() => plugin.current.stop()}
-      onMouseLeave={() => plugin.current.reset()}
+      className="relative h-full w-full"
+      setApi={setApi}
+      onMouseEnter={() => autoplayRef.current.stop()}
+      onMouseLeave={() => autoplayRef.current.play()}
     >
-      <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <div className="border p-1">
-              <div>
-                <div className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
-                </div>
-              </div>
-            </div>
-          </CarouselItem>
-        ))}
+      <CarouselContent className="ml-0 h-full w-full gap-0">
+        <CarouselItem className="pl-0">
+          <ImageSlide src="/home/bannerHome.png" alt="Banner 1" />
+        </CarouselItem>
+        <CarouselItem className="pl-0">
+          <ClickableImageSlide src="/home/bannerHome.png" alt="Banner 2" href="/productos" />
+        </CarouselItem>
+        <CarouselItem className="pl-0">
+          <VideoSlide src="/home/videoHome.mp4" onFullscreenChange={handleFullscreenChange} />
+        </CarouselItem>
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+
+      <CarouselDots className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 rounded-full bg-white px-3 py-1.5 shadow" />
     </Carousel>
   );
 }

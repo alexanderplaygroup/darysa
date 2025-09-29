@@ -19,7 +19,7 @@ export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
     return (
       <div
         ref={ref}
-        className={cn('mx-auto w-full px-6 py-20 2xl:px-0', sizes[size], className)}
+        className={cn('mx-auto w-full px-6 py-16 2xl:px-0', sizes[size], className)}
         {...props}
       />
     );
