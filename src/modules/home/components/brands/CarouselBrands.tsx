@@ -3,11 +3,12 @@ import { cn } from '@/lib/utils';
 import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '@shadcnui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
+import { useResponsiveGroupSize } from '../../hook/useResponsiveGroupSize';
 
-export function CarouselBrand() {
+export default function CarouselBrands() {
   const autoplayRef = useRef(Autoplay({ delay: 4000, playOnInit: true }));
-  const [groupSize, setGroupSize] = useState(6);
+  const groupSize = useResponsiveGroupSize({ xl: 6, lg: 5, md: 4, sm: 3, base: 2 });
 
   const images = [
     '/home/brands/b1.png',
@@ -24,25 +25,6 @@ export function CarouselBrand() {
     '/home/brands/b4.png',
     '/home/brands/b5.png',
   ];
-
-  useEffect(() => {
-    function updateGroupSize() {
-      const width = window.innerWidth;
-      if (width >= 1280)
-        setGroupSize(6); // xl
-      else if (width >= 1024)
-        setGroupSize(5); // lg
-      else if (width >= 768)
-        setGroupSize(4); // md
-      else if (width >= 640)
-        setGroupSize(3); // sm
-      else setGroupSize(2); // base
-    }
-
-    updateGroupSize();
-    window.addEventListener('resize', updateGroupSize);
-    return () => window.removeEventListener('resize', updateGroupSize);
-  }, []);
 
   return (
     <Carousel

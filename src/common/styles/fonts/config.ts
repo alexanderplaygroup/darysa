@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Barlow, Geist, Geist_Mono, Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const geistSans = Geist({
@@ -11,6 +11,19 @@ export const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
+export const barlow = Barlow({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], // todos los pesos que necesites
+  variable: '--font-barlow',
+  display: 'swap',
+});
+
+export const inter = Inter({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], // todos los pesos que necesites
+  variable: '--font-inter',
+  display: 'swap',
+});
 export const boston = localFont({
   src: [
     { path: './boston/BostonThin.otf', weight: '100', style: 'normal' },

@@ -1,24 +1,24 @@
 import { AppBreadcrumb, BreadcrumbItemType } from '@/common/components/custom-ui/AppBreadcrumb';
 import { AppImage } from '@/common/components/custom-ui/AppImage';
 import { Container } from '@/common/components/custom-ui/Container';
-import { LoginForm } from './components/LoginForm';
+import { RegisterForm } from './components/RegisterForm';
 
 const breadcrumbItems: BreadcrumbItemType[] = [
   { label: 'Home', href: '/' },
-  { label: 'Iniciar Sesión', isCurrent: true },
+  { label: 'Registrarme', isCurrent: true },
 ];
 
-export const LoginView = () => {
+export const RegisterView = () => {
   return (
     <Container>
       <div className="mb-8 space-y-4">
         <AppBreadcrumb items={breadcrumbItems} />
-        <h1 className="text-darysa-verde-oscuro text-4xl font-bold">Iniciar Sesión</h1>
+        <h1 className="text-darysa-verde-oscuro text-4xl font-bold">Registrarme</h1>
       </div>
-      <div className="grid w-full grid-cols-1 items-stretch justify-between gap-28 lg:grid-cols-2">
-        <LoginForm />
+      <div className="grid w-full grid-cols-2 items-start justify-between gap-28">
+        <RegisterForm />
 
-        <div className="relative ml-auto aspect-[4/3] w-full">
+        <div className="relative ml-auto aspect-square w-full">
           <AppImage
             src="/home/bannerHome.png"
             alt="Pantalla de inicio de sesión"

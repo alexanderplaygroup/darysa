@@ -1,5 +1,5 @@
+import { AppImage } from '@/common/components/custom-ui/AppImage';
 import { PlayIcon } from 'lucide-react';
-import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 type ImageSlideProps = {
@@ -11,7 +11,7 @@ type ImageSlideProps = {
 export function ImageSlide({ src, alt, height = 500 }: ImageSlideProps) {
   return (
     <div className="relative w-full" style={{ height }}>
-      <Image src={src} alt={alt} fill className="object-cover object-center" priority />
+      <AppImage src={src} alt={alt} fill sizes="100vw" className="object-centerobject-center" />
     </div>
   );
 }
@@ -23,7 +23,7 @@ type ClickableImageSlideProps = ImageSlideProps & {
 export function ClickableImageSlide({ src, alt, href, height = 500 }: ClickableImageSlideProps) {
   return (
     <a href={href} className="relative block w-full" style={{ height }} target="_blank">
-      <Image src={src} alt={alt} fill className="object-cover object-center" priority />
+      <AppImage src={src} alt={alt} fill sizes="100vw" className="object-centerobject-center" />
     </a>
   );
 }

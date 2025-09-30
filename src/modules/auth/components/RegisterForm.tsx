@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Lock } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -18,20 +18,29 @@ import {
 } from '@/common/components/shadcn-ui/form';
 import { Input } from '@/common/components/shadcn-ui/input';
 
-// Esquema de validación con Zod
-const loginSchema = z.object({
-  email: z.email('Ingrese un email válido'),
-  password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
-});
+const registerSchema = z
+  .object({
+    fullName: z.string().min(1, 'El nombre completo es obligatorio'),
+    email: z.email({ message: 'Ingrese un email válido' }),
+    password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
+    confirmPassword: z.string().min(6, 'Debe repetir la contraseña'),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ['confirmPassword'],
+    message: 'Las contraseñas no coinciden',
+  });
 
-export function LoginForm() {
+export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
+      fullName: '',
       email: '',
       password: '',
+      confirmPassword: '',
     },
   });
 
@@ -39,19 +48,40 @@ export function LoginForm() {
     console.log('Google sign-in clicked');
   };
 
-  const onSubmit = (values: z.infer<typeof loginSchema>) => {
-    console.log('Login attempt:', values);
+  const onSubmit = (values: z.infer<typeof registerSchema>) => {
+    console.log('Register attempt:', values);
   };
 
   return (
     <div className="border-darysa-gris-claro-alt/60 rounded-xl border bg-white p-8 shadow-lg md:p-12">
       <h2 className="text-darysa-gris-medio-alt mb-8 text-xl font-semibold">
-        Entrar con e-mail y contraseña
+        Registrarme con e-mail y contraseña
       </h2>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4.5">
-          {/* Email Field */}
+          {/* Nombre Completo */}
+          <FormField
+            control={form.control}
+            name="fullName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-darysa-gris-medio-alt font-semibold">
+                  Nombre Completo <span className="text-destructive">*</span>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="Escribe tu nombre completo"
+                    className="placeholder:text-darysa-gris-medio-alt-2 h-12 rounded-sm text-base"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Email */}
           <FormField
             control={form.control}
             name="email"
@@ -64,7 +94,7 @@ export function LoginForm() {
                   <Input
                     {...field}
                     type="email"
-                    placeholder="Escribe Aquí"
+                    placeholder="Escribe tu correo"
                     className="placeholder:text-darysa-gris-medio-alt-2 h-12 rounded-sm text-base"
                   />
                 </FormControl>
@@ -73,7 +103,7 @@ export function LoginForm() {
             )}
           />
 
-          {/* Password Field */}
+          {/* Password */}
           <FormField
             control={form.control}
             name="password"
@@ -105,6 +135,43 @@ export function LoginForm() {
             )}
           />
 
+          {/* Confirm Password */}
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-darysa-gris-medio-alt font-semibold">
+                  Repetir Contraseña <span className="text-destructive">*</span>
+                </FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <Input
+                      {...field}
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      placeholder="Repite tu contraseña"
+                      className="placeholder:text-darysa-gris-medio-alt-2 h-12 pr-12 text-base"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2"
+                      aria-label={showConfirmPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                    >
+                      {showConfirmPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Link recuperar contraseña */}
           <div className="mb-6.5">
             <Link
               href="/recuperar-contrasena"
@@ -114,23 +181,13 @@ export function LoginForm() {
             </Link>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <Button
-              type="submit"
-              className="bg-darysa-gris-oscuro h-12 flex-1 rounded-sm text-base font-semibold text-white hover:bg-[#1a1a1a]"
-            >
-              Ingresar
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              className="border-darysa-gris-oscuro text-darysa-gris-oscuro h-12 flex-1 rounded-sm border bg-transparent text-base font-semibold hover:bg-gray-50"
-              asChild
-            >
-              <Link href="/registro">Crear una Cuenta</Link>
-            </Button>
-          </div>
+          {/* Botón principal */}
+          <Button
+            type="submit"
+            className="bg-darysa-gris-oscuro h-12 w-full rounded-sm text-base font-semibold text-white hover:bg-[#1a1a1a]"
+          >
+            Registrarme
+          </Button>
         </form>
       </Form>
 
@@ -165,6 +222,19 @@ export function LoginForm() {
           />
         </svg>
         Inicia Sesión con Google
+      </Button>
+
+      {/* Botón adicional */}
+      <Button
+        type="button"
+        variant="outline"
+        className="border-darysa-gris-oscuro mt-3 h-14 w-full rounded-sm border bg-transparent text-base font-semibold hover:bg-gray-50"
+        asChild
+      >
+        <Link href="/login" className="flex items-center gap-2.5">
+          <Lock />
+          Inicia Sesión con Contraseña
+        </Link>
       </Button>
     </div>
   );

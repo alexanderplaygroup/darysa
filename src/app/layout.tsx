@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import { Footer } from '@/common/components/layout/Footer';
 import { Header } from '@/common/components/layout/header/Header';
-import { boston, geistMono, geistSans } from '@/common/styles/fonts/config';
+import { barlow, boston, geistMono, geistSans, inter } from '@/common/styles/fonts/config';
 import '@common/styles/globals.css';
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${boston.className} ${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
+        className={`${boston.className} ${geistSans.variable} ${barlow.variable} ${inter.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
       >
         <Header />
         <main className="flex-1">{children}</main>

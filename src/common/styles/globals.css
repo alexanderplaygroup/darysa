@@ -8,6 +8,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-barlow: var(--font-barlow);
+  --font-inter: var(--font-inter);
   --color-darysa-gris-oscuro: #3d3d3b;
   --color-darysa-gris-oscuro-alt: #787878;
   --color-darysa-gris-claro: #c5c5c5;
@@ -15,6 +17,7 @@
   --color-darysa-gris-medio: #5c5c5c;
   --color-darysa-gris-medio-alt: #3c3c3c;
   --color-darysa-gris-medio-alt-2: #8e8e93;
+  --color-darysa-gris-medio-alt-3: #81859c;
   --color-darysa-amarillo: #ffcc00;
   --color-darysa-verde: #6fb74d;
   --color-darysa-verde-oscuro: #44ac34;

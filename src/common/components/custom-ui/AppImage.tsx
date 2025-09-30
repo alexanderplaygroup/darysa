@@ -3,10 +3,10 @@
 import { cn } from '@/lib/utils';
 import Image, { ImageProps } from 'next/image';
 import { useState } from 'react';
+import { Skeleton } from '../shadcn-ui/skeleton';
 
 type AppImageProps = ImageProps & {
   fallbackSrc?: string;
-  placeholderSrc?: string;
 };
 
 export function AppImage({
@@ -14,7 +14,6 @@ export function AppImage({
   alt = 'Imagen no disponible',
   className,
   fallbackSrc = '/auth/placeholderLogin.png',
-  placeholderSrc = '/auth/placeholderLogin.png',
   ...props
 }: AppImageProps) {
   const [imgSrc, setImgSrc] = useState(src);
@@ -25,7 +24,7 @@ export function AppImage({
     return (
       <div
         className={cn(
-          'flex h-full w-full items-center justify-center bg-gray-100 text-sm text-gray-500',
+          'bg-accent flex h-full w-full items-center justify-center text-sm text-gray-500',
           className
         )}
       >
@@ -35,20 +34,24 @@ export function AppImage({
   }
 
   return (
-    <Image
-      {...props}
-      src={isLoading ? placeholderSrc : imgSrc || fallbackSrc}
-      alt={alt}
-      className={cn(
-        'object-cover transition-opacity duration-300',
-        isLoading ? 'opacity-50 blur-sm' : 'opacity-100',
-        className
-      )}
-      onLoadingComplete={() => setIsLoading(false)}
-      onError={() => {
-        setImgSrc(fallbackSrc);
-        setHasError(true);
-      }}
-    />
+    <>
+      {isLoading && <Skeleton className={cn('h-full w-full', className)} />}
+
+      <Image
+        {...props}
+        src={imgSrc || fallbackSrc}
+        alt={alt}
+        className={cn(
+          'object-cover transition-opacity duration-500',
+          isLoading ? 'opacity-0' : 'opacity-100',
+          className
+        )}
+        onLoad={() => setIsLoading(false)}
+        onError={() => {
+          setImgSrc(fallbackSrc);
+          setHasError(true);
+        }}
+      />
+    </>
   );
 }

@@ -22,7 +22,8 @@
       "@/*": ["./src/*"],
       "@shadcnui/*": ["./src/common/components/shadcn-ui/*"],
       "@common/*": ["./src/common/*"],
-      "@public/*": ["./public/*"]
+      "@public/*": ["./public/*"],
+      "@modules/*": ["./src/modules/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
