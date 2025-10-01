@@ -4,10 +4,10 @@ import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '@shadcnui
 import Autoplay from 'embla-carousel-autoplay';
 import Image from 'next/image';
 import { useRef } from 'react';
-import { useResponsiveGroupSize } from '../../hook/useResponsiveGroupSize';
+import { useResponsiveGroupSize } from '../hook/useResponsiveGroupSize';
 
 export default function CarouselBrands() {
-  const autoplayRef = useRef(Autoplay({ delay: 4000, playOnInit: true }));
+  const autoplayRef = useRef(Autoplay({ delay: 5000, playOnInit: true }));
   const groupSize = useResponsiveGroupSize({ xl: 6, lg: 5, md: 4, sm: 3, base: 2 });
 
   const images = [
@@ -32,17 +32,17 @@ export default function CarouselBrands() {
       opts={{
         align: 'start',
         loop: true,
-        slidesToScroll: 1,
+        slidesToScroll: groupSize,
       }}
       className="w-full space-y-10"
       onMouseEnter={() => autoplayRef.current.stop()}
       onMouseLeave={() => autoplayRef.current.play()}
     >
-      <CarouselContent className="ml-0 flex w-full items-center justify-between">
+      <CarouselContent className="-ml-6 items-center">
         {images.map((src, index) => (
           <CarouselItem
             key={index}
-            className="basis-1/2 pl-0 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6"
+            className="basis-1/2 pl-6 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6"
           >
             <Image
               src={src}
@@ -57,17 +57,15 @@ export default function CarouselBrands() {
 
       <CarouselDots
         className="mx-auto w-fit gap-1.5"
-        byGroup
-        groupSize={groupSize} // dinámico según el responsive
         renderDot={(index, isActive, goTo) => (
           <div
             key={index}
             onClick={goTo}
             className={cn(
-              'h-2.5 w-2.5 rounded-full transition-all duration-200',
+              'h-2.5 w-2.5 rounded-full transition-all duration-400',
               isActive
                 ? 'bg-darysa-amarillo w-12 lg:w-14'
-                : 'bg-darysa-gris-claro-alt cursor-pointer'
+                : 'bg-darysa-gris-claro-alt hover:bg-darysa-gris-claro cursor-pointer'
             )}
           >
             {/* Puedes incluso mostrar mini-previews del grupo */}

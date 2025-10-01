@@ -8,11 +8,7 @@ import {
 } from '@shadcnui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { useEffect, useRef, useState } from 'react';
-import {
-  ClickableImageSlide,
-  ImageSlide,
-  VideoSlide,
-} from './components/carousel-banner/CarouselItemCustom';
+import { ClickableImageSlide, ImageSlide, VideoSlide } from './CarouselItemCustom';
 
 export function Banner() {
   const autoplayRef = useRef(Autoplay({ delay: 4000, playOnInit: false }));
@@ -63,7 +59,7 @@ export function Banner() {
       onMouseEnter={() => autoplayRef.current.stop()}
       onMouseLeave={() => autoplayRef.current.play()}
     >
-      <CarouselContent className="ml-0 h-full w-full gap-0">
+      <CarouselContent className="ml-0 h-full w-full">
         <CarouselItem className="pl-0">
           <ImageSlide src="/home/bannerHome.png" alt="Banner 1" />
         </CarouselItem>

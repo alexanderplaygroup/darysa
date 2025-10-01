@@ -2,76 +2,43 @@
 import { Container } from '@/common/components/custom-ui/Container';
 import { ProductCard } from '@/common/components/custom-ui/product/productCard';
 import { Skeleton } from '@/common/components/shadcn-ui/skeleton';
+import { CreditCard, Headset, Shield, Truck } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { Banner } from './Banner';
+import { BenefitsSection } from './components/BenefitsSection';
+import { Banner } from './components/carousel-banner/Banner';
+import CarouselPacks from './components/CarouselPacks';
+import { PromotionalGrid } from './components/promocional-grid/PromotionalGrid';
+import { PromotionalBanner } from './components/PromotionalBanner';
 import { PromotionalModal } from './components/PromotionalModal';
+import { products, promoBanner, promoItems } from './data';
+import { BenefitItems } from './type';
 
-const CarouselBrands = dynamic(() => import('./components/brands/CarouselBrands'), {
+const CarouselBrands = dynamic(() => import('./components/CarouselBrands'), {
   ssr: false,
   loading: () => <Skeleton className="aspect-[16/3] h-[136px] w-full rounded-xl" />,
 });
 
 export const HomeView = () => {
-  // Datos de prueba
-  const products = [
-    {
-      id: 1,
-      image: '/product/product.png',
-      name: 'Lejía 5% Daryza x 3.8L',
-      sku: '123456789',
-      brand: 'Daryza',
-      price: 15,
-      discount: 10,
-    },
-    {
-      id: 2,
-      image: '/product/product2.png',
-      name: 'Detergente Líquido Daryza x 2L',
-      sku: '987654321',
-      brand: 'Daryza',
-      price: 20,
-      discount: 15,
-    },
-    {
-      id: 3,
-      image: '/product/product3.png',
-      name: 'Limpiador Multiusos Daryza x 1L',
-      sku: '456789123',
-      brand: 'Daryza',
-      price: 12.5,
-      discount: 0,
-    },
-    {
-      id: 4,
-      image: '/product/product2.png',
-      name: 'Detergente Líquido Daryza x 2L',
-      sku: '987654321',
-      brand: 'Daryza',
-      price: 20,
-      discount: 15,
-    },
-    {
-      id: 5,
-      image: '/product/product3.png',
-      name: 'Limpiador Multiusos Daryza x 1L',
-      sku: '456789123',
-      brand: 'Daryza',
-      price: 12.5,
-      discount: 0,
-    },
-  ];
+  const benefitsData: BenefitItems = {
+    first: { title: 'Hasta 5 años de garantía', icon: <Shield className="size-15" /> },
+    second: { title: 'Envío a todo Perú', icon: <Truck className="size-15" /> },
+    third: { title: 'Pago seguro', icon: <CreditCard className="size-15" /> },
+    fourth: { title: 'Soporte 24/7', icon: <Headset className="size-15" /> },
+  };
   return (
     <>
       <Container size="full" className="px-0 py-0">
         <Banner />
       </Container>
-      <Container className="relative space-y-8">
+
+      <Container className="space-y-8">
         <h3 className="text-darysa-gris-oscuro text-4xl font-bold">Marcas Aliadas</h3>
         <div className="aspect-[16/3] h-[136px] w-full">
           <CarouselBrands />
         </div>
       </Container>
-      <Container className="relative space-y-8 pt-0">
+
+      <Container className="space-y-8 pt-0">
         <h3 className="text-darysa-gris-oscuro text-4xl font-bold">Los más vendidos</h3>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {products.map((product) => (
@@ -87,9 +54,24 @@ export const HomeView = () => {
               onToggleFavorite={() => console.log('Toggle favorite:', product.name)}
             />
           ))}
-        </div>{' '}
+        </div>
       </Container>
 
+      <Container size="full" className="relative pt-0">
+        <PromotionalBanner banner={promoBanner} />
+      </Container>
+
+      <Container className="pt-0">
+        <PromotionalGrid items={promoItems} />
+      </Container>
+
+      <Container className="pt-0">
+        <BenefitsSection items={benefitsData} />
+      </Container>
+
+      <Container className="space-y-8 pt-0">
+        <CarouselPacks />
+      </Container>
       <PromotionalModal modal="/logo-dark.svg" />
     </>
   );

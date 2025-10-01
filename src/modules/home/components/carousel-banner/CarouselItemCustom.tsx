@@ -11,7 +11,7 @@ type ImageSlideProps = {
 export function ImageSlide({ src, alt, height = 500 }: ImageSlideProps) {
   return (
     <div className="relative w-full" style={{ height }}>
-      <AppImage src={src} alt={alt} fill sizes="100vw" className="object-centerobject-center" />
+      <AppImage src={src} alt={alt} fill sizes="100vw" className="object-center" />
     </div>
   );
 }
@@ -23,7 +23,7 @@ type ClickableImageSlideProps = ImageSlideProps & {
 export function ClickableImageSlide({ src, alt, href, height = 500 }: ClickableImageSlideProps) {
   return (
     <a href={href} className="relative block w-full" style={{ height }} target="_blank">
-      <AppImage src={src} alt={alt} fill sizes="100vw" className="object-centerobject-center" />
+      <AppImage src={src} alt={alt} fill sizes="100vw" className="object-center" />
     </a>
   );
 }
