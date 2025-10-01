@@ -10,7 +10,7 @@ import {
 } from '@shadcnui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { products } from '../data';
 import { useResponsiveGroupSize } from '../hook/useResponsiveGroupSize';
 
@@ -19,18 +19,59 @@ export default function CarouselPacks() {
   const [embla, setEmbla] = useState<CarouselApi | null>(null); // Referencia Embla
 
   const groupSize = useResponsiveGroupSize({ xl: 4, lg: 4, md: 4, sm: 3, base: 2 });
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
 
+  // Actualizamos el estado cuando Embla cambia de slide
+  useEffect(() => {
+    if (!embla) return;
+
+    const onSelect = () => {
+      setCanPrev(embla.canScrollPrev());
+      setCanNext(embla.canScrollNext());
+    };
+
+    onSelect(); // estado inicial
+    embla.on('select', onSelect);
+
+    return () => {
+      embla.off('select', onSelect);
+    };
+  }, [embla]);
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between bg-amber-600">
         <h3 className="text-darysa-gris-oscuro text-4xl font-bold">Pack de Productos</h3>
 
         <div className="flex gap-2">
-          <button type="button" onClick={() => embla?.scrollPrev()}>
-            <ChevronLeft />
+          <button
+            type="button"
+            onClick={() => embla?.scrollPrev()}
+            disabled={!canPrev}
+            className={cn(
+              'text-darysa-verde-oscuro transition-colors duration-200',
+              canPrev ? 'cursor-pointer' : 'text-darysa-gris-medio-alt-2 opacity-50'
+            )}
+            onMouseEnter={() => autoplayRef.current.stop()}
+            onMouseLeave={() => autoplayRef.current.play()}
+          >
+            <ChevronLeft className="size-10" />
+            <span className="sr-only">Anterior</span>
           </button>
-          <button type="button" onClick={() => embla?.scrollNext()}>
-            <ChevronRight />
+
+          <button
+            type="button"
+            onClick={() => embla?.scrollNext()}
+            disabled={!canNext}
+            className={cn(
+              'text-darysa-verde-oscuro transition-colors duration-200',
+              canNext ? 'cursor-pointer' : 'text-darysa-gris-medio-alt-2 opacity-50'
+            )}
+            onMouseEnter={() => autoplayRef.current.stop()}
+            onMouseLeave={() => autoplayRef.current.play()}
+          >
+            <ChevronRight className="size-10" />
+            <span className="sr-only">Siguiente</span>
           </button>
         </div>
       </div>
@@ -39,7 +80,7 @@ export default function CarouselPacks() {
         plugins={[autoplayRef.current]}
         opts={{
           align: 'start',
-          loop: true,
+          loop: false,
           slidesToScroll: groupSize,
         }}
         className="w-full space-y-10"
