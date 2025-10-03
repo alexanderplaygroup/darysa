@@ -40,10 +40,10 @@ export default function CarouselPacks() {
   }, [embla]);
   return (
     <>
-      <div className="flex items-center justify-between bg-amber-600">
+      <div className="flex items-center justify-between">
         <h3 className="text-darysa-gris-oscuro text-4xl font-bold">Pack de Productos</h3>
 
-        <div className="flex gap-2">
+        <div className="flex gap-6">
           <button
             type="button"
             onClick={() => embla?.scrollPrev()}
@@ -55,7 +55,7 @@ export default function CarouselPacks() {
             onMouseEnter={() => autoplayRef.current.stop()}
             onMouseLeave={() => autoplayRef.current.play()}
           >
-            <ChevronLeft className="size-10" />
+            <ChevronLeft className="size-8" />
             <span className="sr-only">Anterior</span>
           </button>
 
@@ -70,7 +70,7 @@ export default function CarouselPacks() {
             onMouseEnter={() => autoplayRef.current.stop()}
             onMouseLeave={() => autoplayRef.current.play()}
           >
-            <ChevronRight className="size-10" />
+            <ChevronRight className="size-8" />
             <span className="sr-only">Siguiente</span>
           </button>
         </div>
@@ -117,7 +117,7 @@ export default function CarouselPacks() {
               className={cn(
                 'h-2.5 w-2.5 rounded-full transition-all duration-400',
                 isActive
-                  ? 'bg-darysa-amarillo w-12 lg:w-14'
+                  ? 'bg-darysa-verde-oscuro w-[34px]'
                   : 'bg-darysa-gris-claro-alt hover:bg-darysa-gris-claro cursor-pointer'
               )}
             >

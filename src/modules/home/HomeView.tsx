@@ -6,6 +6,7 @@ import { CreditCard, Headset, Shield, Truck } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { BenefitsSection } from './components/BenefitsSection';
 import { Banner } from './components/carousel-banner/Banner';
+import CarouselBlogs from './components/CarouselBlogs';
 import CarouselPacks from './components/CarouselPacks';
 import { PromotionalGrid } from './components/promocional-grid/PromotionalGrid';
 import { PromotionalBanner } from './components/PromotionalBanner';
@@ -21,9 +22,9 @@ const CarouselBrands = dynamic(() => import('./components/CarouselBrands'), {
 export const HomeView = () => {
   const benefitsData: BenefitItems = {
     first: { title: 'Hasta 5 años de garantía', icon: <Shield className="size-15" /> },
-    second: { title: 'Envío a todo Perú', icon: <Truck className="size-15" /> },
-    third: { title: 'Pago seguro', icon: <CreditCard className="size-15" /> },
-    fourth: { title: 'Soporte 24/7', icon: <Headset className="size-15" /> },
+    second: { title: 'Envíos a Todo el perú', icon: <Truck className="size-15" /> },
+    third: { title: 'Atención las 24 horas', icon: <CreditCard className="size-15" /> },
+    fourth: { title: 'Pagos 100% seguros', icon: <Headset className="size-15" /> },
   };
   return (
     <>
@@ -71,6 +72,9 @@ export const HomeView = () => {
 
       <Container className="space-y-8 pt-0">
         <CarouselPacks />
+      </Container>
+      <Container className="space-y-8 pt-0">
+        <CarouselBlogs />
       </Container>
       <PromotionalModal modal="/logo-dark.svg" />
     </>
