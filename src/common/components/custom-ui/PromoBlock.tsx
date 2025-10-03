@@ -25,7 +25,7 @@ export const PromoBlock = ({ item, className, aspect }: PromoBlockProps) => {
   return (
     <Wrapper
       {...(item.link ? { href: item.link, target: '_blank', rel: 'noopener noreferrer' } : {})}
-      className={`relative block ${aspect} overflow-hidden rounded-sm ${className || ''}`}
+      className={`relative block ${aspect} overflow-hidden rounded-lg ${className || ''}`}
     >
       {ImageContent}
     </Wrapper>

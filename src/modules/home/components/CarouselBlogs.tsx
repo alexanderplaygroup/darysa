@@ -1,16 +1,78 @@
 'use client';
-import { ProductCard } from '@/common/components/custom-ui/product/productCard';
+import { BlogCard } from '@/common/components/custom-ui/blog/BlogCard';
 import { cn } from '@/lib/utils';
 import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '@shadcnui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
-import { products } from '../data';
 import { useResponsiveGroupSize } from '../hook/useResponsiveGroupSize';
 
 export default function CarouselBlogs() {
   const autoplayRef = useRef(Autoplay({ delay: 5000, playOnInit: true }));
 
-  const groupSize = useResponsiveGroupSize({ xl: 3, lg: 3, md: 3, sm: 3, base: 2 });
+  const groupSize = useResponsiveGroupSize({ xl: 3, lg: 3, md: 3, sm: 2, base: 1 });
+  const blogPosts = [
+    {
+      imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f',
+      category: 'Tecnología',
+      title: 'La revolución de la IA en el desarrollo web',
+      author: {
+        name: 'María Pérez',
+        avatarUrl: 'https://randomuser.me/api/portraits/women/44.jpg',
+      },
+      date: '3 de Octubre, 2025',
+    },
+    {
+      imageUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4',
+      category: 'Negocios',
+      title: 'Estrategias de crecimiento para startups en 2025',
+      author: {
+        name: 'Carlos Gómez',
+        avatarUrl: 'https://randomuser.me/api/portraits/men/32.jpg',
+      },
+      date: '28 de Septiembre, 2025',
+    },
+    {
+      imageUrl: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2',
+      category: 'Diseño',
+      title: 'Tendencias de diseño minimalista en interfaces',
+      author: {
+        name: 'Ana Torres',
+        avatarUrl: 'https://randomuser.me/api/portraits/women/65.jpg',
+      },
+      date: '20 de Septiembre, 2025',
+    },
+    {
+      imageUrl: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2',
+      category: 'Diseño',
+      title: 'Tendencias de diseño minimalista en interfaces',
+      author: {
+        name: 'Ana Torres',
+        avatarUrl: 'https://randomuser.me/api/portraits/women/65.jpg',
+      },
+      date: '20 de Septiembre, 2025',
+    },
+    {
+      imageUrl: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2',
+      category: 'Diseño',
+      title:
+        'Tendencias de diseño minimalista en interfaces ssssssssss sss sss ssssssssssssssssssssssssssss ssssssssssssssssssssssssssssssssssssssss',
+      author: {
+        name: 'Ana Torres',
+        avatarUrl: 'https://randomuser.me/api/portraits/women/65.jpg',
+      },
+      date: '20 de Septiembre, 2025',
+    },
+    {
+      imageUrl: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2',
+      category: 'Diseño',
+      title: 'Tendencias de diseño minimalista en interfaces',
+      author: {
+        name: 'Ana Torres',
+        avatarUrl: 'https://randomuser.me/api/portraits/women/65.jpg',
+      },
+      date: '20 de Septiembre, 2025',
+    },
+  ];
 
   return (
     <>
@@ -28,22 +90,12 @@ export default function CarouselBlogs() {
         onMouseLeave={() => autoplayRef.current.play()}
       >
         <CarouselContent className="-ml-6">
-          {products.map((product, index) => (
+          {blogPosts.map((post, index) => (
             <CarouselItem
               key={index}
-              className="basis-1/2 pl-6 sm:basis-1/3 md:basis-1/3 lg:basis-1/3 xl:basis-1/3"
+              className="basis-full pl-6 sm:basis-1/2 md:basis-1/3 lg:basis-1/3 xl:basis-1/3"
             >
-              <ProductCard
-                key={product.id}
-                image={product.image}
-                name={product.name}
-                sku={product.sku}
-                brand={product.brand}
-                price={product.price}
-                discount={product.discount}
-                onAddToCart={() => console.log('Add to cart:', product.name)}
-                onToggleFavorite={() => console.log('Toggle favorite:', product.name)}
-              />
+              <BlogCard key={index} {...post} />
             </CarouselItem>
           ))}
         </CarouselContent>

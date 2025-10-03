@@ -1,4 +1,4 @@
-import { BannerPromotional } from '../interfaces';
+import { BannerPromotional } from '@/common/components/custom-ui/PromotionalBanner';
 
 export const products = [
   {

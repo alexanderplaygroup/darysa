@@ -1,6 +1,6 @@
 'use client';
 
-import { PromoBlock } from './PromoBlock';
+import { PromoBlock } from '@/common/components/custom-ui/PromoBlock';
 
 interface PromoItem {
   id: number;

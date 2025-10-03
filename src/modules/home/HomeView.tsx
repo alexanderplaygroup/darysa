@@ -1,6 +1,7 @@
 'use client';
 import { Container } from '@/common/components/custom-ui/Container';
 import { ProductCard } from '@/common/components/custom-ui/product/productCard';
+import { PromotionalBanner } from '@/common/components/custom-ui/PromotionalBanner';
 import { Skeleton } from '@/common/components/shadcn-ui/skeleton';
 import { CreditCard, Headset, Shield, Truck } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -8,8 +9,7 @@ import { BenefitsSection } from './components/BenefitsSection';
 import { Banner } from './components/carousel-banner/Banner';
 import CarouselBlogs from './components/CarouselBlogs';
 import CarouselPacks from './components/CarouselPacks';
-import { PromotionalGrid } from './components/promocional-grid/PromotionalGrid';
-import { PromotionalBanner } from './components/PromotionalBanner';
+import { PromotionalGrid } from './components/PromotionalGrid';
 import { PromotionalModal } from './components/PromotionalModal';
 import { products, promoBanner, promoItems } from './data';
 import { BenefitItems } from './type';

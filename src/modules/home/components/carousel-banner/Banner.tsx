@@ -61,10 +61,10 @@ export function Banner() {
     >
       <CarouselContent className="ml-0 h-full w-full">
         <CarouselItem className="pl-0">
-          <ImageSlide src="/home/bannerHome.png" alt="Banner 1" />
+          <VideoSlide src="/home/videoHome.mp4" onFullscreenChange={handleFullscreenChange} />
         </CarouselItem>
         <CarouselItem className="pl-0">
-          <VideoSlide src="/home/videoHome.mp4" onFullscreenChange={handleFullscreenChange} />
+          <ImageSlide src="/home/bannerHome.png" alt="Banner 1" />
         </CarouselItem>
         <CarouselItem className="pl-0">
           <ClickableImageSlide src="/home/bannerHome.png" alt="Banner 2" href="/productos" />

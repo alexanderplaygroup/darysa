@@ -54,7 +54,9 @@ export const ProductCard = ({
 
           {/* Product Subtitle */}
           {(sku || brand) && (
-            <p className="text-xs text-gray-500">{[sku, brand].filter(Boolean).join(' / ')}</p>
+            <p className="text-darysa-gris-medio-alt-3 text-xs">
+              {[sku, brand].filter(Boolean).join(' / ')}
+            </p>
           )}
 
           {/* Pricing Section */}

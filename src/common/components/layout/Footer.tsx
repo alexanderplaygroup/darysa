@@ -2,6 +2,7 @@ import { socialIcons } from '@/common/data/social';
 import { Mail, PhoneCall } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { AppImage } from '../custom-ui/AppImage';
 import { Container } from '../custom-ui/Container';
 
 export const Footer = () => {
@@ -10,7 +11,7 @@ export const Footer = () => {
       title: 'Información',
       links: [
         { name: 'Acerca de Nosotros', href: '#mentions' },
-        { name: 'Términos y Condiciones', href: '#confidentialite' },
+        { name: 'Términos y Condiciones', href: '/terminos-y-condiciones' },
         { name: 'Trabaja con Nosotros', href: '#conditions' },
         { name: 'Mi Cuenta', href: '#cookies' },
       ],
@@ -19,9 +20,9 @@ export const Footer = () => {
       title: 'Ayuda',
       links: [
         { name: 'Contacto', href: '#voi' },
-        { name: 'Libro de Reclamaciones', href: '#voi-system' },
+        { name: 'Libro de Reclamaciones', href: '/libro-de-reclamaciones' },
         { name: 'Servicio al Cliente', href: '#solutions' },
-        { name: 'Política Anticorrupción y Antisoborno', href: '#innovation' },
+        { name: 'Política Anticorrupción y Antisoborno', href: 'politica-de-privacidad' },
       ],
     },
   ];
@@ -43,7 +44,7 @@ export const Footer = () => {
             <Image
               src="/logo-dark.svg"
               alt="logo"
-              className="object-cover"
+              className="object-contain"
               width={247}
               height={54}
             />
@@ -106,34 +107,37 @@ export const Footer = () => {
 
         {/* Bottom Section */}
         <div className="grid grid-cols-[0.6fr_1.4fr] border-t border-white/10 pt-6">
-          <div className="flex w-full items-center gap-6">
+          <div className="flex w-fit items-center gap-6">
             {socialIcons.map((icon, idx) => (
-              <Image
-                key={idx}
-                src={icon.src}
-                alt={icon.alt}
-                className="h-auto w-auto object-cover"
-                width={40}
-                height={40}
-              />
+              <div key={idx} className="h-[32px] min-w-[32px]">
+                <AppImage
+                  key={idx}
+                  src={icon.src}
+                  alt={icon.alt}
+                  className="w-auto rounded-sm object-contain"
+                  width={32}
+                  height={32}
+                />
+              </div>
             ))}
           </div>
-          <div className="flex w-full items-center justify-between">
+          <div className="flex items-center justify-between">
             <div className="text-darysa-gris-claro text-sm font-bold">
               © 2012-2024. Daryza S.A.C RUC 20144109458 Todos los derechos reservados
             </div>
 
             {/* Payment Methods */}
-            <div className="flex items-center gap-2.5">
+            <div className="flex w-fit items-center justify-end gap-2">
               {paymentMethods.map((pay, idx) => (
-                <Image
-                  key={idx}
-                  src={pay.src}
-                  alt={pay.alt}
-                  className="h-auto w-auto object-cover"
-                  width={40}
-                  height={40}
-                />
+                <div key={idx} className="h-[30px] min-w-[45px]">
+                  <AppImage
+                    src={pay.src}
+                    alt={pay.alt}
+                    className="w-auto rounded-sm object-contain"
+                    width={50}
+                    height={30}
+                  />
+                </div>
               ))}
             </div>
           </div>
